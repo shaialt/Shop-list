@@ -1,0 +1,109 @@
+body {
+    background-image: url(images/bg.png);
+}
+
+.main_div {
+    border: 1px solid white;
+    border-radius: 10px;
+    width: 500px;
+    padding: 30px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-top: 30px;
+}
+
+h1 {
+    text-align: center;
+    color: white;
+}
+
+h2 {
+    text-align: center;
+    color: white;
+}
+
+.choose_item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 280px;
+    margin-bottom: 20px;
+}
+
+.input {
+    background-color: transparent;
+    color: white;
+    border: 1px solid #7C9ED3;
+    border-radius: 10px;
+    padding: 5px;
+    height: 30px;
+}
+
+.input::placeholder {
+    color: white;
+}
+
+.error {
+    margin: 0px 0px 20px 5px;
+    font-size: 13px;
+    color: red;
+    display: none;
+}
+
+.add_item_button {
+    height: 40px;
+    width: 80px;
+    border-radius: 5px;
+    background-color: #32CD32;
+    border: 1px solid #96DF4A;
+    color: white;
+    cursor: pointer;
+}
+
+.item_div {
+    border: 1px dashed white;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-left: 20px;
+    padding-right: 20px;
+    margin-bottom: 20px;
+    color: white;
+    background-color: transparent;
+}
+
+.item_div p {
+    font-size: 20px;
+}
+
+.button_div {
+    width: 160px;
+    display: flex;
+    justify-content: end;
+}
+
+.done_button {
+    background-color: #32CD32;
+    border: 1px solid #96DF4A;
+    border-radius: 5px;
+    height: 40px;
+    width: 80px;
+    color: white;
+    cursor: pointer;
+}
+
+.delete_button {
+    background-color: #ff4d4d;
+    border: 1px solid #ff6666;
+    border-radius: 5px;
+    height: 40px;
+    width: 80px;
+    margin-left: 10px;
+    display: none;
+    color: white;
+    cursor: pointer;
+}
