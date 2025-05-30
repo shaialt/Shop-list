@@ -1,4 +1,16 @@
-let localStorage = [];
+let arrayItem = [];
+
+// שולף מה - מאגר נתונים כאשר הדפדפן נטען
+window.onload = function() {
+    let storedItem = localStorage.getItem('myItem');
+    if(storedItem)
+    {
+        arrayItem = JSON.parse(storedItem);
+        arrayItem.forEach(element => {
+            addNewItem(element.value, element.status, element.id);
+        });
+    }
+}
 
 let addItem = document.querySelector('.add_item_button');
 let parent = document.querySelector('.choose_item');
@@ -20,9 +32,10 @@ function onButtonClick(){
     }
     else
     {
-        localStorage.push({value: input, status: 'false', id: id})
-        addNewItem(input, id);
-        console.log(localStorage);
+        arrayItem.push({value: input, status: 'false', id: id});
+        localStorage.setItem('myItem', JSON.stringify(arrayItem));
+        addNewItem(input, 'false', id);
+        console.log(arrayItem);
         parent.querySelector('#choose_item').value = '';
         document.querySelector('.error').style.display = 'none';
         document.querySelector('.choose_item').style.marginBottom = '20px';
@@ -30,7 +43,7 @@ function onButtonClick(){
 }
 
 //הפונקציה המשנית - מוסיפה ומורידה פריטים
-function addNewItem(input, id){
+function addNewItem(input, status, id){
     // item.innerHTML = '<div class="item_div"><p></p><div class="button_div"><button class="done_button" type="button">Done</button><button class="delete_button" type="button">Delete</button></div></div>';
     // יצירת תבנית הפריט
     let item = document.createElement('div');
@@ -54,6 +67,17 @@ function addNewItem(input, id){
     buttonDiv.append(redButton);
     document.querySelector('.main_div').append(item);
 
+    // מצב הכפתורים לפי סטטוס מהמאגר נתונים
+    if (status === 'true') {
+        greenButton.style.display = 'none';
+        redButton.style.display = 'block';
+    } 
+    
+    else {
+        greenButton.style.display = 'block';
+        redButton.style.display = 'none';
+    }
+
         //אחראי על לחיצת כפתור אישור
         let doneButtons = item.querySelector('.done_button');
         doneButtons.addEventListener('click', doneChange);
@@ -68,12 +92,15 @@ function addNewItem(input, id){
 
             //שינוי סטטוס פריט במערך
             let itemId = Number(parent.getAttribute('id'));
-            let localStorageIndexId = localStorage.find(item => item.id === itemId);
-            if(localStorageIndexId)
+            let arrayItemIndexId = arrayItem.find(item => item.id === itemId);
+            if(arrayItemIndexId)
             {
-                localStorageIndexId.status = 'true';
+                arrayItemIndexId.status = 'true';
+                localStorage.setItem('myItem', JSON.stringify(arrayItem));
+
             }
-            console.log(localStorage);
+            console.log(arrayItem);
+
         }
 
         //אחראי על מחיקת פריט
@@ -84,15 +111,16 @@ function addNewItem(input, id){
 
         function deleteItem(event){
             let parent = event.target.closest('.item_div');
+            let itemId = Number(parent.getAttribute('id'));
             parent.remove();
 
             //הסרה מהמערך
-            let itemText = parent.querySelector('p').innerText.trim();
-            let index = localStorage.findIndex(item => item.value === itemText);
+            let index = arrayItem.findIndex(item => item.id === itemId);
             if (index !== -1)
             {
-                localStorage.splice(index, 1); // הסרת הפריט
+                arrayItem.splice(index, 1); // הסרת הפריט
+                localStorage.setItem('myItem', JSON.stringify(arrayItem));
             }
-            console.log(localStorage);
+            console.log(arrayItem);
         }
 }
