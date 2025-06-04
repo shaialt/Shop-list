@@ -1,11 +1,18 @@
 body {
     background-image: url(images/bg.png);
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+form {
+    margin: 0px 10px;
 }
 
 .main_div {
     border: 1px solid white;
     border-radius: 10px;
-    width: 500px;
+    max-width: 500px;
     padding: 30px;
     background: rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(10px);
